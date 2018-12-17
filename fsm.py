@@ -454,7 +454,7 @@ class TocMachine(GraphMachine):
 	def on_enter_man(self, event):
 		print("I'm entering man")
 		sender_id = event['sender']['id']
-		age.send(sender_id, Template.Generic([
+		page.send(sender_id, Template.Generic([
 			Template.GenericElement("rift",
 							subtitle="Next-generation virtual reality",
 							item_url="https://www.youtube.com/watch?v=wFqUAw_NYvs",

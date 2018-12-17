@@ -465,6 +465,7 @@ class TocMachine(GraphMachine):
 		print("I'm entering woman")
 
 		sender_id = event['sender']['id']
+		page.send(recipient_id, Attachment.Video("https://www.youtube.com/watch?v=P8uJ4gFjJGE"))
 		quick_replies = [QuickReply(title="好 拜拜~", payload="PICK_bye")]
 		page.send(sender_id, "隨機推薦你一位女歌手的歌囉~",quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")
 

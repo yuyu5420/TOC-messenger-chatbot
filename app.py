@@ -32,7 +32,6 @@ def webhook_handler():
 	print(body)
 
 	event = body['entry'][0]['messaging'][0]
-	#show_fsm()
 	# only deal text messages
 	if event['message'].get('text'):
 		machine.advance(event)
@@ -44,12 +43,6 @@ def webhook_handler():
 		page.send(sender_id, "嗨~\n你現在想要做什麼呢?",quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")
 
 	return 'OK'
-
-@app.route("/", methods=['GET','POST'])
-def show_fsm():
-
-    machine.get_graph().draw('fsm.png', prog='dot', format='png')
-    return static_file('fsm.png', root='./', mimetype='image/png')
 
 def verify_fb_token(token_sent):
     #take token sent by facebook and verify it matches the verify token you sent

@@ -8,7 +8,7 @@ import os
 
 ACCESS_TOKEN = 'EAAE76EQAyvkBAICpHDgGVsN4VinEMFWPJGcTj55F3CnxL9sp3ny2tBbvHLtUvZCmZClDtVrXkQ0Ayt6PKxomCmVQ54IySasQC5mNXUageyeA9Rer1vq9ZCvDIlnwHfpBfINN4jpBZAZAgHB1zzQZCLyh52ll1fTBFVnJwIvq94n10ZCxFSpeczW'
 VERIFY_TOKEN = '123'
-#PORT = os.environ['PORT']
+PORT = os.environ['PORT']
 
 page = Page(ACCESS_TOKEN)
 machine = TocMachine();
@@ -48,5 +48,5 @@ def webhook_handler():
 	return 'OK'
 
 if __name__ == "__main__":
-    run(host="localhost", port=5000, debug=True, reloader=True)
+    run(host="0.0.0.0", port=PORT, debug=True, reloader=True)
 

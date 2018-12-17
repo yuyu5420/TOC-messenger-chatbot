@@ -1,5 +1,5 @@
 #Python libraries that we need to import for our bot
-import random
+
 from bottle import route, run, request, abort, static_file
 from fbmq import Page
 from fbmq import Attachment, Template, QuickReply, Page

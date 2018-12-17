@@ -455,13 +455,14 @@ class TocMachine(GraphMachine):
 		print("I'm entering man")
 		sender_id = event['sender']['id']
 		responses = ["atGbcYTjZCY", "KEgOrgcLu0s", "Dnj5Tcpev0Q", "s-CcFyyPJiY", "wFqUAw_NYvs"]
+		select = random.choice(responses)
 		page.send(sender_id, Template.Generic([
 			Template.GenericElement("男歌手歌曲",
 							subtitle ="  ",
-							item_url = "https://www.youtube.com/watch?v=" + random.choice(responses),
-							image_url = "https://img.youtube.com/vi/" + random.choice(responses) + "/hqdefault.jpg",
+							item_url = "https://www.youtube.com/watch?v=" + select,
+							image_url = "https://img.youtube.com/vi/" + select + "/hqdefault.jpg",
 							buttons = [
-								Template.ButtonWeb("Open Web URL", "https://www.youtube.com/watch?v=" + random.choice(responses)),
+								Template.ButtonWeb("Open Web URL", "https://www.youtube.com/watch?v=" + select),
 								Template.ButtonPostBack("好 拜拜~", "DEVELOPED_DEFINED_PAYLOAD")
 							])
 		]))

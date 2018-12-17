@@ -455,14 +455,14 @@ class TocMachine(GraphMachine):
 		print("I'm entering man")
 		sender_id = event['sender']['id']
 		page.send(sender_id, Template.Generic([
-  		Template.GenericElement("rift",
-                          subtitle="Next-generation virtual reality",
-                          item_url="https://www.youtube.com/watch?v=wFqUAw_NYvs",
-                          image_url="https://img.youtube.com/vi/wFqUAw_NYvs/hqdefault.jpg",
-                          buttons=[
-                              Template.ButtonWeb("https://www.youtube.com/watch?v=wFqUAw_NYvs"),
-                              Template.ButtonPostBack("tigger Postback", "DEVELOPED_DEFINED_PAYLOAD")
-                          ])
+		Template.GenericElement("rift",
+							subtitle="Next-generation virtual reality",
+							item_url="https://www.youtube.com/watch?v=wFqUAw_NYvs",
+							image_url="https://img.youtube.com/vi/wFqUAw_NYvs/hqdefault.jpg",
+							buttons=[
+							Template.ButtonWeb("https://www.youtube.com/watch?v=wFqUAw_NYvs"),
+							Template.ButtonPostBack("tigger Postback", "DEVELOPED_DEFINED_PAYLOAD")
+							])
 		]))
 		responses = ["https://www.youtubeFB.com/watch?v=atGbcYTjZCY", "https://www.youtubeFB.com/watch?v=KEgOrgcLu0s", "https://www.youtubeFB.com/watch?v=Dnj5Tcpev0Q", "https://www.youtubeFB.com/watch?v=s-CcFyyPJiY", "https://www.youtubeFB.com/watch?v=wFqUAw_NYvs"]
 		page.send(sender_id, "隨機推薦你一位男歌手的歌囉~")

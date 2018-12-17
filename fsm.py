@@ -456,7 +456,7 @@ class TocMachine(GraphMachine):
 		sender_id = event['sender']['id']
 		responses = ["atGbcYTjZCY", "KEgOrgcLu0s", "Dnj5Tcpev0Q", "s-CcFyyPJiY", "wFqUAw_NYvs"]
 		page.send(sender_id, Template.Generic([
-			Template.GenericElement(" ",
+			Template.GenericElement("男歌手歌曲",
 							subtitle ="  ",
 							item_url = "https://www.youtube.com/watch?v=" + random.choice(responses),
 							image_url = "https://img.youtube.com/vi/" + random.choice(responses) + "/hqdefault.jpg",

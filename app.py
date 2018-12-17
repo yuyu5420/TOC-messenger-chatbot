@@ -6,8 +6,8 @@ from fbmq import Attachment, Template, QuickReply, Page
 from fsm import TocMachine 
 import os
 
-ACCESS_TOKEN = 'EAAE76EQAyvkBAICpHDgGVsN4VinEMFWPJGcTj55F3CnxL9sp3ny2tBbvHLtUvZCmZClDtVrXkQ0Ayt6PKxomCmVQ54IySasQC5mNXUageyeA9Rer1vq9ZCvDIlnwHfpBfINN4jpBZAZAgHB1zzQZCLyh52ll1fTBFVnJwIvq94n10ZCxFSpeczW'
-VERIFY_TOKEN = '123'
+ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
+VERIFY_TOKEN = os.environ['VERTIFY_TOKEN']
 PORT = os.environ['PORT']
 
 page = Page(ACCESS_TOKEN)

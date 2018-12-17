@@ -197,6 +197,9 @@ class TocMachine(GraphMachine):
 			}
 		],
 		initial='init',
+		auto_transitions=False,
+		show_conditions=True,
+
 	)
 
 	def is_going_to_playing(self, event):

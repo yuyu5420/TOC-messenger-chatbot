@@ -2,15 +2,15 @@
 import random
 from bottle import static_file
 from flask import Flask, request
-from fsm import TocMachine
 from fbmq import Page
 from fbmq import Attachment, Template, QuickReply, Page
+from fsm import TocMachine 
 import os
 
 app = Flask(__name__)
 ACCESS_TOKEN = 'EAAE76EQAyvkBAICpHDgGVsN4VinEMFWPJGcTj55F3CnxL9sp3ny2tBbvHLtUvZCmZClDtVrXkQ0Ayt6PKxomCmVQ54IySasQC5mNXUageyeA9Rer1vq9ZCvDIlnwHfpBfINN4jpBZAZAgHB1zzQZCLyh52ll1fTBFVnJwIvq94n10ZCxFSpeczW'
 VERIFY_TOKEN = '123'
-PORT = os.environ['PORT']
+#PORT = os.environ['PORT']
 
 page = Page(ACCESS_TOKEN)
 machine = TocMachine();
@@ -63,4 +63,4 @@ def get_message():
 #uses PyMessenger to send response to user 
 
 if __name__ == "__main__":
-    app.run(host = "0.0.0.0", port = PORT, debug=True)
+    app.run(host = "0.0.0.0", debug=True)

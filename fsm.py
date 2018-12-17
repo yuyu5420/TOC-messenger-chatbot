@@ -341,7 +341,7 @@ class TocMachine(GraphMachine):
 		sender_id = event['sender']['id']
 		page.send(sender_id, Attachment.Image("https://i.imgur.com/EdQYTpW.png"))
 		quick_replies = [QuickReply(title="好 拜拜~", payload="PICK_bye")]
-		page.send(sender_id, "希望你有朋友跟你聊天><\n我太笨了先跟你說拜拜~",quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")
+		page.send(sender_id, "希望你有朋友跟你聊天><\n拜拜~",quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")
 
 	def on_exit_talking(self, event):
 		print('Leaving talking')

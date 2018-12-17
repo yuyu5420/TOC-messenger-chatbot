@@ -1,13 +1,11 @@
 #Python libraries that we need to import for our bot
 import random
-from bottle import static_file
-from flask import Flask, request
+from bottle import route, run, request, abort, static_file
 from fbmq import Page
 from fbmq import Attachment, Template, QuickReply, Page
 from fsm import TocMachine 
 import os
 
-app = Flask(__name__)
 ACCESS_TOKEN = 'EAAE76EQAyvkBAICpHDgGVsN4VinEMFWPJGcTj55F3CnxL9sp3ny2tBbvHLtUvZCmZClDtVrXkQ0Ayt6PKxomCmVQ54IySasQC5mNXUageyeA9Rer1vq9ZCvDIlnwHfpBfINN4jpBZAZAgHB1zzQZCLyh52ll1fTBFVnJwIvq94n10ZCxFSpeczW'
 VERIFY_TOKEN = '123'
 #PORT = os.environ['PORT']
@@ -15,20 +13,23 @@ VERIFY_TOKEN = '123'
 page = Page(ACCESS_TOKEN)
 machine = TocMachine();
 
-#We will receive messages that Facebook sends our bot at this endpoint 
-@app.route("/", methods=['GET'])
-def receive_message():
-    if request.method == 'GET':
-        # Before allowing people to message your bot, Facebook has implemented a verify token
-        # that confirms all requests that your bot receives came from Facebook.
-        token_sent = request.args.get("hub.verify_token")
-        return verify_fb_token(token_sent)
+@route("/webhook", method="GET")
+def setup_webhook():
+    mode = request.GET.get("hub.mode")
+    token = request.GET.get("hub.verify_token")
+    challenge = request.GET.get("hub.challenge")
 
-    #if the request was not get, it must be POST and we can just proceed with sending a message back to user
+    if mode == "subscribe" and token == VERIFY_TOKEN:
+        print("WEBHOOK_VERIFIED")
+        return challenge
 
-@app.route("/", methods=['POST'])
+    else:
+        abort(403)
+
+
+@route("/webhook", method="POST")
 def webhook_handler():
-	body = request.get_json()
+	body = request.json
 	print('\nFSM STATE: ' + machine.state)
 	print('REQUEST BODY: ')
 	print(body)
@@ -46,21 +47,6 @@ def webhook_handler():
 
 	return 'OK'
 
-def verify_fb_token(token_sent):
-    #take token sent by facebook and verify it matches the verify token you sent
-    #if they match, allow the request, else return an error 
-    if token_sent == VERIFY_TOKEN:
-        return request.args.get("hub.challenge")
-    return 'Invalid verification token'
-
-
-#chooses a random message to send to the user
-def get_message():
-    sample_responses = ["777", "0.0"]
-    # return selected item to the user
-    return random.choice(sample_responses)
-
-#uses PyMessenger to send response to user 
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    run(host="localhost", port=5000, debug=True, reloader=True)
+

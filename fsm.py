@@ -453,7 +453,8 @@ class TocMachine(GraphMachine):
 
 	def on_enter_man(self, event):
 		print("I'm entering man")
-		page.send(recipient_id, Template.Generic([
+		sender_id = event['sender']['id']
+		page.send(sender_id, Template.Generic([
   		Template.GenericElement("rift",
                           subtitle="Next-generation virtual reality",
                           item_url="https://www.youtube.com/watch?v=wFqUAw_NYvs",
@@ -464,7 +465,6 @@ class TocMachine(GraphMachine):
                           ])
 		]))
 		responses = ["https://www.youtubeFB.com/watch?v=atGbcYTjZCY", "https://www.youtubeFB.com/watch?v=KEgOrgcLu0s", "https://www.youtubeFB.com/watch?v=Dnj5Tcpev0Q", "https://www.youtubeFB.com/watch?v=s-CcFyyPJiY", "https://www.youtubeFB.com/watch?v=wFqUAw_NYvs"]
-		sender_id = event['sender']['id']
 		page.send(sender_id, "隨機推薦你一位男歌手的歌囉~")
 		quick_replies = [QuickReply(title="好 拜拜~", payload="PICK_bye")]
 		page.send(sender_id, random.choice(responses),quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")

@@ -341,22 +341,33 @@ class TocMachine(GraphMachine):
 	def on_enter_talking(self, event):
 		print("I'm entering talking")
 
-		sender_id = event['sender']['id']
-		res = urlopen("https://news.google.com")
-		soup = BeautifulSoup(res, "html.parser")
-		#choose = random.choice(soup.select(".esc-body"))
-
+		url = "https://www.youtube.com/results?search_query=邊緣人"
+		res = requests.get(url, verify=False)
+		soup = BeautifulSoup(res.text,'html.parser')
+		last = None
+		choices = []
+		for entry in soup.select('a'):
+   			m = re.search("v=(.*)",entry['href'])
+			if m:
+				target = m.group(1)
+			if target == last:
+				continue
+			if re.search("list",target):
+				continue
+			last = target
+			choices.append(target)
+		choosen = random.choice(choices)
 		page.send(sender_id, Template.Generic([
-			Template.GenericElement(soup.select(".esc-lead-article-title")[0].text,
-							subtitle =" ",
-							item_url = soup.select(".esc-lead-article-title")[0].find('a')['href'],
-							image_url = "https://i.imgur.com/EdQYTpW.png",
+			Template.GenericElement("邊緣人專用",
+							subtitle ="  ",
+							item_url = "https://www.youtube.com/watch?v=" + choosen,
+							image_url = "https://img.youtube.com/vi/" + choosen + "/hqdefault.jpg",
 							buttons = [
-								Template.ButtonWeb("Open Web URL", soup.select(".esc-lead-article-title")[0].find('a')['href'])
+								Template.ButtonWeb("Open Web URL", "https://www.youtube.com/watch?v=" + choosen)
 							])
 		]))
 		quick_replies = [QuickReply(title="好 拜拜~", payload="PICK_bye")]
-		page.send(sender_id, "聊什麼天 去關心時事啦><" ,quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")
+		page.send(sender_id, "邊緣人就去看Youtube啦><" ,quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")
 
 
 	def on_exit_talking(self, event):

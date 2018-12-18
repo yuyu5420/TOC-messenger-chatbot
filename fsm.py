@@ -344,15 +344,15 @@ class TocMachine(GraphMachine):
 		sender_id = event['sender']['id']
 		res = urlopen("https://news.google.com")
 		soup = BeautifulSoup(res, "html.parser")
-		choose = random.choice(soup.select(".esc-body"))
+		#choose = random.choice(soup.select(".esc-body"))
 
 		page.send(sender_id, Template.Generic([
-			Template.GenericElement(choose.select(".esc-lead-article-title")[0].text,
+			Template.GenericElement(soup.select(".esc-lead-article-title")[0].text,
 							subtitle =" ",
-							item_url = choose.select(".esc-lead-article-title")[0].find('a')['href'],
+							item_url = soup.select(".esc-lead-article-title")[0].find('a')['href'],
 							image_url = "https://i.imgur.com/EdQYTpW.png",
 							buttons = [
-								Template.ButtonWeb("Open Web URL", choose.select(".esc-lead-article-title")[0].find('a')['href'])
+								Template.ButtonWeb("Open Web URL", soup.select(".esc-lead-article-title")[0].find('a')['href'])
 							])
 		]))
 		quick_replies = [QuickReply(title="好 拜拜~", payload="PICK_bye")]

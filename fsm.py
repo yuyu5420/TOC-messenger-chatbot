@@ -347,7 +347,7 @@ class TocMachine(GraphMachine):
 		last = None
 		choices = []
 		for entry in soup.select('a'):
-   			m = re.search("v=(.*)",entry['href'])
+			m = re.search("v=(.*)",entry['href'])
 			if m:
 				target = m.group(1)
 				if target == last:
@@ -356,7 +356,7 @@ class TocMachine(GraphMachine):
 					continue
 				last = target
 				choices.append(target)
-				
+
 		choosen = random.choice(choices)
 		page.send(sender_id, Template.Generic([
 			Template.GenericElement("邊緣人專用",

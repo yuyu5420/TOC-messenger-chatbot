@@ -346,7 +346,7 @@ class TocMachine(GraphMachine):
 		i = 0
 		for all_mv in soup.select(".yt-lockup-video"):
     	# 抓取 Title & Link
-    		data = all_mv.select("a[rel='spf-prefetch']")
+			data = all_mv.select("a[rel='spf-prefetch']")
 			print(data[0].get("href")[-11:])
     		arr_titles.append(data[0].get("title"))
     		arr_urls.append(data[0].get("href")[-11:])

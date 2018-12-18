@@ -357,6 +357,7 @@ class TocMachine(GraphMachine):
 					continue
 				last = target
 				choices.append(target)
+				print(target)
 
 		choosen = random.choice(choices)
 		page.send(sender_id, Template.Generic([

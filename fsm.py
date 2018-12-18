@@ -355,8 +355,8 @@ class TocMachine(GraphMachine):
 		print(arr_titles[select])
 		print(arr_urls[select])
 		page.send(sender_id, Template.Generic([
-			Template.GenericElement("邊緣人專用",
-							subtitle = arr_titles[select],
+			Template.GenericElement(arr_titles[select],
+							subtitle = "邊緣人專用",
 							item_url = "https://www.youtube.com/watch?v=" + arr_urls[select],
 							image_url = "https://img.youtube.com/vi/" + arr_urls[select] + "/hqdefault.jpg",
 							buttons = [

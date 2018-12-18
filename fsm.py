@@ -3,6 +3,8 @@ from fbmq import Page
 from fbmq import Attachment, Template, QuickReply, Page
 import os
 import random
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
 
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = os.environ['VERTIFY_TOKEN']
@@ -340,9 +342,22 @@ class TocMachine(GraphMachine):
 		print("I'm entering talking")
 
 		sender_id = event['sender']['id']
-		page.send(sender_id, Attachment.Image("https://i.imgur.com/EdQYTpW.png"))
+		res = urlopen("https://news.google.com")
+		soup = BeautifulSoup(res, "html.parser")
+		choose = random.choice(soup.select(".esc-body"))
+
+		page.send(sender_id, Template.Generic([
+			Template.GenericElement(choose.select(".esc-lead-article-title")[0].text,
+							subtitle =" ",
+							item_url = choose.select(".esc-lead-article-title")[0].find('a')['href'],
+							image_url = "https://i.imgur.com/EdQYTpW.png",
+							buttons = [
+								Template.ButtonWeb("Open Web URL", choose.select(".esc-lead-article-title")[0].find('a')['href'])
+							])
+		]))
 		quick_replies = [QuickReply(title="好 拜拜~", payload="PICK_bye")]
-		page.send(sender_id, "希望你有朋友跟你聊天><\n拜拜~",quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")
+		page.send(sender_id, "聊什麼天 去關心時事啦><" ,quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")
+
 
 	def on_exit_talking(self, event):
 		print('Leaving talking')
@@ -454,7 +469,7 @@ class TocMachine(GraphMachine):
 	def on_enter_man(self, event):
 		print("I'm entering man")
 		sender_id = event['sender']['id']
-		responses = ["atGbcYTjZCY", "KEgOrgcLu0s", "Dnj5Tcpev0Q", "s-CcFyyPJiY", "wFqUAw_NYvs"]
+		responses = ["atGbcYTjZCY", "KEgOrgcLu0s", "Dnj5Tcpev0Q", "s-CcFyyPJiY", "wFqUAw_NYvs", "JfnQ8qtcDyQ"]
 		select = random.choice(responses)
 		page.send(sender_id, Template.Generic([
 			Template.GenericElement("男歌手歌曲",
@@ -462,8 +477,7 @@ class TocMachine(GraphMachine):
 							item_url = "https://www.youtube.com/watch?v=" + select,
 							image_url = "https://img.youtube.com/vi/" + select + "/hqdefault.jpg",
 							buttons = [
-								Template.ButtonWeb("Open Web URL", "https://www.youtube.com/watch?v=" + select),
-								Template.ButtonPostBack("好 拜拜~", "DEVELOPED_DEFINED_PAYLOAD")
+								Template.ButtonWeb("Open Web URL", "https://www.youtube.com/watch?v=" + select)
 							])
 		]))
 		quick_replies = [QuickReply(title="好 拜拜~", payload="PICK_bye")]
@@ -475,10 +489,19 @@ class TocMachine(GraphMachine):
 	def on_enter_woman(self, event):
 		print("I'm entering woman")
 		sender_id = event['sender']['id']
-		responses = ["https://www.youtubeFB.com/watch?v=P8uJ4gFjJGE", "https://www.youtubeFB.com/watch?v=3mEeKAdXAo4", "https://www.youtubeFB.com/watch?v=ma7r2HGqwXs", "https://www.youtubeFB.com/watch?v=VGHLqi_mxnk", "https://www.youtubeFB.com/watch?v=NYYuVnjg0SQ", "https://www.youtubeFB.com/watch?v=FqrzCxSWaZY", "https://www.youtubeFB.com/watch?v=k8jAqe9QZ7I", "https://www.youtubeFB.com/watch?v=BRcudpJzy1I"]
-		page.send(sender_id, "隨機推薦你一位女歌手的歌囉~")
+		responses = ["P8uJ4gFjJGE", "3mEeKAdXAo4", "ma7r2HGqwXs", "VGHLqi_mxnk", "NYYuVnjg0SQ", "FqrzCxSWaZY", "k8jAqe9QZ7I", "BRcudpJzy1I"]
+		select = random.choice(responses)
+		page.send(sender_id, Template.Generic([
+			Template.GenericElement("女歌手歌曲",
+							subtitle ="  ",
+							item_url = "https://www.youtube.com/watch?v=" + select,
+							image_url = "https://img.youtube.com/vi/" + select + "/hqdefault.jpg",
+							buttons = [
+								Template.ButtonWeb("Open Web URL", "https://www.youtube.com/watch?v=" + select)
+							])
+		]))
 		quick_replies = [QuickReply(title="好 拜拜~", payload="PICK_bye")]
-		page.send(sender_id, random.choice(responses),quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")
+		page.send(sender_id, "隨機推薦你一位女歌手的歌囉~" ,quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")
 
 	def on_exit_woman(self, event):
 		print('Leaving woman')

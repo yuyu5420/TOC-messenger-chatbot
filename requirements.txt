@@ -1,5 +1,6 @@
 bottle==0.12.13
 pygraphviz==1.5
-requests==2.20.1
+requests
 transitions==0.6.9
 fbmq
+BeautifulSoup4

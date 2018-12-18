@@ -350,12 +350,13 @@ class TocMachine(GraphMachine):
    			m = re.search("v=(.*)",entry['href'])
 			if m:
 				target = m.group(1)
-			if target == last:
-				continue
-			if re.search("list",target):
-				continue
-			last = target
-			choices.append(target)
+				if target == last:
+					continue
+				if re.search("list",target):
+					continue
+				last = target
+				choices.append(target)
+				
 		choosen = random.choice(choices)
 		page.send(sender_id, Template.Generic([
 			Template.GenericElement("邊緣人專用",

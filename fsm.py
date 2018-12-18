@@ -338,7 +338,7 @@ class TocMachine(GraphMachine):
 		print("I'm entering talking")
 		sender_id = event['sender']['id']
 
-		url = "https://www.youtube.com/results?search_query=邊緣人&sp=CAM%253D"
+		url = "https://www.youtube.com/results?search_query=%E9%82%8A%E7%B7%A3%E4%BA%BA&sp=EgQQARgB"
 		res = requests.get(url, verify=False)
 		soup = BeautifulSoup(res.text,'html.parser')
 		arr_titles = []

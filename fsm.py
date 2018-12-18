@@ -342,8 +342,8 @@ class TocMachine(GraphMachine):
 		print("I'm entering talking")
 
 		url = "https://www.youtube.com/results?search_query=邊緣人"
-		res = requests.get(url, verify=False)
-		soup = BeautifulSoup(res.text,'html.parser')
+		res = urlopen(url)
+		soup = BeautifulSoup(res,'html.parser')
 		last = None
 		choices = []
 		for entry in soup.select('a'):

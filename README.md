@@ -17,3 +17,4 @@
 - [x] Generic Template
 - [x] Parsing Website
 - [x] Deploy to Heroku
+- [x] Multiple User Handling

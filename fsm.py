@@ -341,28 +341,26 @@ class TocMachine(GraphMachine):
 		url = "https://www.youtube.com/results?search_query=邊緣人"
 		res = requests.get(url, verify=False)
 		soup = BeautifulSoup(res.text,'html.parser')
-		last = None
-		choices = []
-		for entry in soup.select('a'):
-			m = re.search("v=(.*)",entry['href'])
-			if m:
-				target = m.group(1)
-				if target == last:
-					continue
-				if re.search("list",target):
-					continue
-				last = target
-				choices.append(target)
-				print(target)
-
-		choosen = random.choice(choices)
+		arr_titles = []
+		arr_urls = []
+		i = 0
+		for all_mv in soup.select(".yt-lockup-video"):
+    	# 抓取 Title & Link
+    		data = all_mv.select("a[rel='spf-prefetch']")
+			print(data[0].get("href")[-11:])
+    		arr_titles.append(data[0].get("title"))
+    		arr_urls.append(data[0].get("href")[-11:])
+			i += 1
+		select = random.randint(0,i)
+		print(arr_titles[select])
+		print(arr_urls[select])
 		page.send(sender_id, Template.Generic([
 			Template.GenericElement("邊緣人專用",
-							subtitle ="  ",
-							item_url = "https://www.youtube.com/watch?v=" + choosen,
-							image_url = "https://img.youtube.com/vi/" + choosen + "/hqdefault.jpg",
+							subtitle ="arr_titles[select]",
+							item_url = "https://www.youtube.com/watch?v=" + arr_urls[select],
+							image_url = "https://img.youtube.com/vi/" + arr_urls[select] + "/hqdefault.jpg",
 							buttons = [
-								Template.ButtonWeb("Open Web URL", "https://www.youtube.com/watch?v=" + choosen)
+								Template.ButtonWeb("Open Web URL", "https://www.youtube.com/watch?v=" + arr_urls[select])
 							])
 		]))
 		quick_replies = [QuickReply(title="好 拜拜~", payload="PICK_bye")]

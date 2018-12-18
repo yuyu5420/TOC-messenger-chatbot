@@ -3,7 +3,8 @@ from fbmq import Page
 from fbmq import Attachment, Template, QuickReply, Page
 import os
 import random
-from urllib.request import urlopen
+import re
+import requests
 from bs4 import BeautifulSoup
 
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
@@ -342,8 +343,8 @@ class TocMachine(GraphMachine):
 		print("I'm entering talking")
 
 		url = "https://www.youtube.com/results?search_query=邊緣人"
-		res = urlopen(url)
-		soup = BeautifulSoup(res,'html.parser')
+		res = requests.get(url, verify=False)
+		soup = BeautifulSoup(res.text,'html.parser')
 		last = None
 		choices = []
 		for entry in soup.select('a'):

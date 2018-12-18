@@ -341,7 +341,8 @@ class TocMachine(GraphMachine):
 
 	def on_enter_talking(self, event):
 		print("I'm entering talking")
-
+		sender_id = event['sender']['id']
+		
 		url = "https://www.youtube.com/results?search_query=邊緣人"
 		res = requests.get(url, verify=False)
 		soup = BeautifulSoup(res.text,'html.parser')

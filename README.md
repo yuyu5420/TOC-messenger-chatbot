@@ -12,8 +12,8 @@
 
 ## Bonus
 
-- [x] Sending images
-- [x] Quick replys
-- [x] Generic template
+- [x] Sending Images
+- [x] Quick Replys
+- [x] Generic Template
+- [x] Parsing Website
 - [x] Deploy to Heroku
-- [x] Parsing website

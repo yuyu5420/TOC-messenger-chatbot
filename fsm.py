@@ -348,8 +348,8 @@ class TocMachine(GraphMachine):
     	# 抓取 Title & Link
 			data = all_mv.select("a[rel='spf-prefetch']")
 			print(data[0].get("href")[-11:])
-    		arr_titles.append(data[0].get("title"))
-    		arr_urls.append(data[0].get("href")[-11:])
+			arr_titles.append(data[0].get("title"))
+			arr_urls.append(data[0].get("href")[-11:])
 			i += 1
 		select = random.randint(0,i)
 		print(arr_titles[select])

@@ -16,3 +16,4 @@
 - [x] Quick replys
 - [x] Generic template
 - [x] Deploy to Heroku
+- [x] Parsing website

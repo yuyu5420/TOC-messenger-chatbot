@@ -1,7 +1,6 @@
 #Python libraries that we need to import for our bot
 
 from bottle import route, run, request, abort, static_file
-from fbmq import Page
 from fbmq import Attachment, Template, QuickReply, Page
 from fsm import TocMachine 
 import os
@@ -25,7 +24,6 @@ def setup_webhook():
 
     else:
         abort(403)
-
 
 @route("/webhook", method="POST")
 def webhook_handler():

@@ -1,5 +1,4 @@
 from transitions.extensions import GraphMachine
-from fbmq import Page
 from fbmq import Attachment, Template, QuickReply, Page
 import os
 import random
@@ -310,7 +309,6 @@ class TocMachine(GraphMachine):
 
 		page.send(sender_id, "你對哪一項比較有興趣呢~",quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")
 
-
 	def on_exit_playing(self, event):
 		print('Leaving playing')
 
@@ -322,7 +320,6 @@ class TocMachine(GraphMachine):
 
 		page.send(sender_id, "你對哪一項比較有興趣呢~",quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")
 
-
 	def on_exit_eatting(self, event):
 		print('Leaving eatting')
 
@@ -333,8 +330,6 @@ class TocMachine(GraphMachine):
 		quick_replies = [QuickReply(title="8小時", payload="PICK_8"), QuickReply(title="12小時", payload="PICK_12"), QuickReply(title="24小時", payload="PICK_24")]
 
 		page.send(sender_id, "那你想要睡多久呢><",quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")
-
-
 
 	def on_exit_sleeping(self, event):
 		print('Leaving sleeping')
@@ -397,8 +392,6 @@ class TocMachine(GraphMachine):
 
 		page.send(sender_id, "那你想聽男歌手的歌還是女歌手的呢~",quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")
 
-
-
 	def on_exit_music(self, event):
 		print('Leaving music')
 
@@ -408,7 +401,6 @@ class TocMachine(GraphMachine):
 		sender_id = event['sender']['id']
 		quick_replies = [QuickReply(title="好 拜拜~", payload="PICK_bye")]
 		page.send(sender_id, "多運動身體好<3",quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")
-
 
 	def on_exit_exercise(self, event):
 		print('Leaving exercise')
@@ -421,8 +413,6 @@ class TocMachine(GraphMachine):
 		quick_replies = [QuickReply(title="好 拜拜~", payload="PICK_bye")]
 		page.send(sender_id, "小心胖死><\n不要再喝了~",quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")
 
-
-
 	def on_exit_drinking(self, event):
 		print('Leaving drinking')
 
@@ -432,7 +422,6 @@ class TocMachine(GraphMachine):
 		sender_id = event['sender']['id']
 		quick_replies = [QuickReply(title="好 拜拜~", payload="PICK_bye")]
 		page.send(sender_id, "你真是個準時吃飯的好孩子~",quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")
-
 
 	def on_exit_meal(self, event):
 		print('Leaving meal')
@@ -465,7 +454,6 @@ class TocMachine(GraphMachine):
 		page.send(sender_id, Attachment.Image("https://i.imgur.com/WfO1GfO.png"))
 		quick_replies = [QuickReply(title="好 拜拜~", payload="PICK_bye")]
 		page.send(sender_id, "你還有很多作業跟考試><\n你要被當了QQ",quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")
-
 
 	def on_exit_12hr(self, event):
 		print('Leaving 12hr')

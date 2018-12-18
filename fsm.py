@@ -338,7 +338,7 @@ class TocMachine(GraphMachine):
 		print("I'm entering talking")
 		sender_id = event['sender']['id']
 
-		url = "https://www.youtube.com/results?search_query=無聊"
+		url = "https://www.youtube.com/results?search_query=邊緣人&sp=CAM%253D"
 		res = requests.get(url, verify=False)
 		soup = BeautifulSoup(res.text,'html.parser')
 		arr_titles = []
@@ -364,7 +364,7 @@ class TocMachine(GraphMachine):
 							])
 		]))
 		quick_replies = [QuickReply(title="好 拜拜~", payload="PICK_bye")]
-		page.send(sender_id, "去看無聊的Youtube啦><" ,quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")
+		page.send(sender_id, "邊緣人就去看跟邊緣人相關的影片啦><" ,quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")
 
 
 	def on_exit_talking(self, event):

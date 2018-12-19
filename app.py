@@ -28,6 +28,7 @@ def setup_webhook():
 @route("/webhook", method="POST")
 def webhook_handler():
 	body = request.json
+	machine.state = "talking"
 	print('\nFSM STATE: ' + machine.state)
 	print('REQUEST BODY: ')
 	print(body)

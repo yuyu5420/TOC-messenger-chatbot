@@ -10,8 +10,9 @@
 ## Finite State Machine Graph
 ![fsm](./fsm.png)
 
-## Bonus
+## Features
 
+- [x] Entertainment
 - [x] Sending Images
 - [x] Quick Replys
 - [x] Generic Template

@@ -42,6 +42,7 @@ def webhook_handler():
 	# only deal text messages
 	if event['message'].get('text'):
 		machine.advance(event)
+		Records[sender_id] = machine.state
 	# initial state
 	if machine.state == "init":
 		quick_replies = [QuickReply(title="休閒娛樂", payload="PICK_PLAY"), QuickReply(title="進食", payload="PICK_EAT"), QuickReply(title="睡覺", payload="PICK_SLEEP"), QuickReply(title="聊天", payload="PICK_TALK")]

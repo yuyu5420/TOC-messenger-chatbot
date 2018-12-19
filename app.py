@@ -8,7 +8,7 @@ import os
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
 VERIFY_TOKEN = os.environ['VERTIFY_TOKEN']
 PORT = os.environ['PORT']
-
+Records = {"test": 1}
 page = Page(ACCESS_TOKEN)
 machine = TocMachine();
 @route("/webhook", method="GET")
@@ -27,6 +27,7 @@ def setup_webhook():
 @route("/webhook", method="POST")
 def webhook_handler():
 	body = request.json
+	event = body['entry'][0]['messaging'][0]
 	global Records
 	sender_id = event['sender']['id']
 	if Records[sender_id]:
@@ -37,7 +38,7 @@ def webhook_handler():
 	print('REQUEST BODY: ')
 	print(body)
 
-	event = body['entry'][0]['messaging'][0]
+	
 	# only deal text messages
 	if event['message'].get('text'):
 		machine.advance(event)

@@ -33,7 +33,7 @@ def webhook_handler():
 	if sender_id in Records:
 		machine.state = Records[sender_id]
 	else:
-		Records[sender_id] = machine.state
+		machine.state = "init"
 	print('\nFSM STATE: ' + machine.state)
 	print('REQUEST BODY: ')
 	print(body)

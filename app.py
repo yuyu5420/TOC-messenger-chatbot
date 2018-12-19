@@ -30,7 +30,7 @@ def webhook_handler():
 	event = body['entry'][0]['messaging'][0]
 	global Records
 	sender_id = event['sender']['id']
-	if Records.has_key(sender_id):
+	if sender_id in Records:
 		machine.state = Records[sender_id]
 	else:
 		Records[sender_id] = machine.state

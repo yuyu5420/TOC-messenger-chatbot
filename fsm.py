@@ -32,7 +32,8 @@ class TocMachine(GraphMachine):
 			'24hr',
 			'man',
 			'woman',
-			'bye'
+			'bye',
+			'demo'
 		],
 		transitions=[
 			{
@@ -192,9 +193,15 @@ class TocMachine(GraphMachine):
 				'conditions': 'is_going_to_bye'
 			},
 			{
+ 				'trigger': 'advance',
+				'source': 'bye'',
+				'dest': 'demo',
+				'conditions': 'is_going_to_demo'
+			},
+			{
 				'trigger': 'go_back',
 				'source': [
-					'bye'
+					'demo'
 				],
 				'dest': 'init'
 			}
@@ -299,6 +306,12 @@ class TocMachine(GraphMachine):
 		if event.get("message"):
 			text = event['message']['text']
 			return text == '好 拜拜~'
+		return False
+
+	def is_going_to_bye(self, event):
+		if event.get("message"):
+			text = event['message']['text']
+			return text == 'demo'
 		return False
 
 	def on_enter_playing(self, event):
@@ -509,7 +522,11 @@ class TocMachine(GraphMachine):
 		
 	def on_enter_bye(self, event):
 		print("I'm entering bye")
+		##self.go_back()
+
+	def on_enter_demo(self, event):
+		print("DEMO~~~~")
 		self.go_back()
 
-	def on_exit_bye(self):
-		print('Leaving bye')
+	##def on_exit_bye(self):
+	##	print('Leaving bye')

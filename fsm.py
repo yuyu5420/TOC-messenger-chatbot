@@ -194,7 +194,7 @@ class TocMachine(GraphMachine):
 			},
 			{
  				'trigger': 'advance',
-				'source': 'bye'',
+				'source': 'bye',
 				'dest': 'demo',
 				'conditions': 'is_going_to_demo'
 			},

@@ -526,6 +526,7 @@ class TocMachine(GraphMachine):
 
 	def on_enter_demo(self, event):
 		print("DEMO~~~~")
+		page.send(sender_id, "DEMO~~~~~~~")
 		self.go_back()
 
 	##def on_exit_bye(self):

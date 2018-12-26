@@ -308,7 +308,7 @@ class TocMachine(GraphMachine):
 			return text == '好 拜拜~'
 		return False
 
-	def is_going_to_bye(self, event):
+	def is_going_to_demo(self, event):
 		if event.get("message"):
 			text = event['message']['text']
 			return text == 'demo'

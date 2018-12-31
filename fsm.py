@@ -32,6 +32,7 @@ class TocMachine(GraphMachine):
 			'24hr',
 			'man',
 			'woman',
+			'year',
 			'bye'
 		],
 		transitions=[
@@ -46,6 +47,12 @@ class TocMachine(GraphMachine):
 				'source': 'init',
 				'dest': 'eatting',
 				'conditions': 'is_going_to_eatting'
+			},
+			{
+ 				'trigger': 'advance',
+				'source': 'init',
+				'dest': 'year',
+				'conditions': 'is_going_to_year'
 			},
 			{
  				'trigger': 'advance',
@@ -192,6 +199,12 @@ class TocMachine(GraphMachine):
 				'conditions': 'is_going_to_bye'
 			},
 			{
+ 				'trigger': 'advance',
+				'source': 'year',
+				'dest': 'bye',
+				'conditions': 'is_going_to_bye'
+			},
+			{
 				'trigger': 'go_back',
 				'source': [
 					'bye'
@@ -227,6 +240,12 @@ class TocMachine(GraphMachine):
 		if event.get("message"):
 			text = event['message']['text']
 			return text == '聊天'
+		return False
+	
+	def is_going_to_year(self, event):
+		if event.get("message"):
+			text = event['message']['text']
+			return text == '新年快樂'
 		return False
 
 	def is_going_to_game(self, event):
@@ -366,11 +385,23 @@ class TocMachine(GraphMachine):
 		quick_replies = [QuickReply(title="好 拜拜~", payload="PICK_bye")]
 		page.send(sender_id, "邊緣人就去看跟邊緣人相關的影片啦><" ,quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")
 
+		
+	def on_enter_year(self, event):
+		print("I'm entering year")
+		sender_id = event['sender']['id']
+		page.send(sender_id, Attachment.Image("https://i.imgur.com/ozyA7lf.gif"))
+		quick_replies = [QuickReply(title="好 拜拜~", payload="PICK_bye")]
+		page.send(sender_id, "新年快樂~恭喜發財<3" ,quick_replies=quick_replies,metadata="DEVELOPER_DEFINED_METADATA")
 
 	def on_exit_talking(self, event):
 		print('Leaving talking')
-
-
+		
+	def on_exit_year(self, event):
+		print('Leaving year')
+		sender_id = event['sender']['id']
+		page.send(sender_id, Attachment.Image("https://i.imgur.com/4w2XREA.png"))
+		page.send(sender_id, "87期末考不讀書 只會讓學校發財啦")
+		
 	def on_enter_game(self, event):
 		print("I'm entering game")
 
